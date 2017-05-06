@@ -1,19 +1,17 @@
 var app = angular.module('singin', []);
-app.controller('SinginCtrl',['$scope','$http', function($scope, $http){
-	console.log("Singin Controller Activate");
 
+app.controller('SinginCtrl',['$scope','$http', function($scope, $http){
 	var returnToLogin = function(){
-		console.log("Return to Login");
+		$http.get("/student", function(){
+			console.log("Return to Login");
+			$scope.student = null;
+		});
 	}
 
 	$scope.addStudent = function(){
-		console.log($scope.student);
 		$http.post('/student', $scope.student).then(function(response){
 			console.log(response);
-			refresh();
-		});
+			returnToLogin();
+		});	
 	};
-
-
-
 }])
