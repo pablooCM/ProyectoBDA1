@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<div class="container" ng-controller="SinginCtrl">
+	<form name="Container" class="container" ng-controller="SinginCtrl">
 		<h1>Registro</h1>
 
 		<table class="table">
@@ -23,34 +23,48 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><p>Nombre </p></td>
-					<td><input class="form-control" ng-model="student.name"></td>	
+					<td>Nombre *</td>
+					<td>
+						<input type="text" name="studentName" class="form-control" ng-model="student.name" required>
+						<span style="color:red" ng-show="Container.studentName.$dirty && Container.studentName.$invalid">
+	  						<span ng-show="Container.studentName.$error.required">Nombre de usuario requerido.</span>
+	  					</span>
+  					</td>
 				</tr>
 				<tr>
-					<td><p>Carnet </p></td>
-					<td><input class="form-control" ng-model="student.cardNumber"></td>	
+					<td>Carné *</td>
+					<td>
+						<input type="number" class="form-control" ng-model="student.cardNumber" name="studentCard" required>
+						<span style="color:red" ng-show="Container.studentCard.$dirty && Container.studentCard.$invalid">
+	  						<span ng-show="Container.studentCard.$error.required">Nombre de usuario requerido.</span>
+	  					</span>
+					</td>
 				</tr>
 				<tr>
-					<td><p>email </p></td>
-					<td><input class="form-control" ng-model="student.email"></td>	
+					<td>Email *</td>
+					<td>
+						<input type="email" class="form-control" ng-model="student.email" name="studentEmail" required>
+						<span style="color:red" ng-show="Container.studentEmail.$dirty && Container.studentEmail.$invalid">
+						<span ng-show="Container.studentEmail.$error.required">Email is required.</span>
+						<span ng-show="Container.studentEmail.$error.email">Invalid email address.</span>
+						</span>
+					</td>
 				</tr>
 				<tr>
-					<td><p>celular </p></td>
-					<td><input class="form-control" ng-model="student.celNumber"></td>	
+					<td>Celular</td>
+					<td><input type="number" class="form-control" ng-model="student.celNumber"></td>
 				</tr>
 				<tr>
-					<td><p>Preferencias </p></td>
-					<td><input class="form-control" ng-model="student.preferences"></td>	
-				</tr>
-
-				<tr>
-					<td colspan="2" align="center"><button class = "btn btn-primary" ng-click = "addStudent()">Registrarse</button></td>
+					<td colspan="2" align="center">
+						<button class = "btn btn-primary" ng-click = "addStudent()" ng-disabled= "Container.studentName.$dirty && Container.studentName.$invalid || 
+						Container.studentName.$dirty && Container.studentName.$invalid || Container.studentEmail.$dirty && Container.studentEmail.$invalid">Registrarse</button>
+					</td>
 				</tr>
 			</tbody>
-		</table>>
+		</table>
 
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="controller.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="controller.js"></script>
+	</form>
 </body>
 </html>
