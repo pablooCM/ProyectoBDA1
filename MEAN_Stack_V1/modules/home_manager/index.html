@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html ng-app="managerApp">
 <head>
   <!-- Latest compiled and minified CSS -->
@@ -14,6 +14,10 @@
 <body>
   <button class="btn btn-primary" ng-click="logout()">Cerrar Sesión</button>
   <div class="container" ng-controller="ManagerCtrl">
+    
+    <h2>Reportes de cursos</h2>
+    <td><a href="../home_manager/reports"><button class="btn btn-success">Reportes</button></a></td>
+
     <h2>Gestionar cursos</h2>
     <table class="table">
       <thead>
@@ -44,7 +48,7 @@
           <td>{{course.semester}}</td>
           <td>{{course.year}}</td>
 
-          <td><a href="preferencias.html"><button class="btn btn-success">Preferencias</button></a></td>
+          <td><a href="../home_manager/preferences"><button class="btn btn-success">Preferencias</button></a></td>
           <td><button class="btn btn-warning" ng-click="editCourse(course._id)">Modificar Curso</button></td>
           <td><button class="btn btn-danger" ng-click="removeCourse(course._id)">Borrar Curso</button></td>
 
@@ -66,13 +70,13 @@
       </thead>
 
       <tbody>
-          <tr ng-repeat ="student in studentList">
-            <td>{{student.name}}</td>
-            <td>{{student.cardNumber}}</td>
-            <td>{{student.course}}</td>
-            <td>{{student.email}}</td>
+        <tr ng-repeat ="student in studentList">
+          <td>{{student.name}}</td>
+          <td>{{student.cardNumber}}</td>
+          <td>{{student.course}}</td>
+          <td>{{student.email}}</td>
 
-            <td><a href="estudiante.html"><button class="btn btn-secondary">Ver Información</button></a></td>
+          <td><a href="estudiante.html"><button class="btn btn-secondary">Ver Información</button></a></td>
         </tr>
       </tbody>
     </table>
@@ -83,3 +87,4 @@
   <script src="controller.js"></script>
 </body>
 </html>
+
