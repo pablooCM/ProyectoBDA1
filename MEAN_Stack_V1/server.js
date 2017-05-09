@@ -1,87 +1,99 @@
 // Express
+// Express
 var express = require('express');
 var app = express();
+var router = express.Router();
 // Mongo
 var mongojs = require('mongojs');
-var db = mongojs('mean_stack_v2', ['student','course']);
+var db = mongojs('mean_stack_v3', ['student','courseList']);
 // JSON
 var bodyParser = require('body-parser');
 // Port
 var port = 8080;
 
-
 app.use(express.static( __dirname + "/modules"));
 app.use(bodyParser.json());
-/*
-app.get('/student', function(req, res){
-	console.log("I received a GET request for student")
 
-	db.student.find(function(err, docs){
+
+
+/**********************
+	Login Functions
+**********************/
+app.get('/', function(req, res){
+	res.redirect('/');
+});
+
+app.get('/singup', function(req, res){
+	res.render('/singup/index.html');
+});
+
+/************************
+	Student Functions
+************************/
+app.get('/studentList', function(req, res){
+
+	db.studentList.find(function(err, docs){
 		console.log(docs);
 		res.json(docs);
 	});
 });
 
-app.get('/course', function(req, res){
-	console.log("I received a GET request for course")
+app.post('/studentList', function(req,res){
+	db.studentList.insert(req.body, function(err, doc){
+		res.json(doc);
+	});
+});
 
-	db.course.find(function(err, docs){
+app.get('/studentList/:email', function(req, res){
+	var email = req.params.email;
+	db.studentList.findOne({email: email}, function(err, doc){
+		res.json(doc);
+	});
+});
+
+
+
+/************************
+	Courses Functions
+************************/
+app.get('/courseList', function(req, res){
+	db.courseList.find(function(err, docs){
 		console.log(docs);
 		res.json(docs);
 	});
 });
-*/
-app.post('/student', function(req,res){
-	console.log(req.body);
 
-	db.student.insert(req.body, function(err, doc){
+app.post('/courseList', function (req, res){
+	db.courseList.insert(req.body, function(err, doc){
 		res.json(doc);
-	});
-});
-/*
-app.post('/course', function(req,res){
-	console.log(req.body);
-
-	db.student.insert(req.body, function(err, doc){
-		res.json(doc);
-	});
+	})
 });
 
-app.delete('/student/:id', function(req,res){
+app.delete('/courseList/:id', function(req, res){
 	var id = req.params.id;
 	console.log(id);
-
-	db.student.remove({_id: mongojs.ObjectId(id)}, function(err,doc){
+	db.courseList.remove({_id: mongojs.ObjectId(id)}, function(err, doc){
 		res.json(doc);
-	});
+	})
 });
 
-app.delete('/course/:id', function(req,res){
+app.get('/courseList/:id', function(req, res){
 	var id = req.params.id;
 	console.log(id);
-	
-	db.course.remove({_id: mongojs.ObjectId(id)}, function(err,doc){
+	db.courseList.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){
 		res.json(doc);
 	});
 });
 
-app.get('/student/:id', function(req, res){
+app.put('/courseList/:id', function(req, res){
 	var id = req.params.id;
-	console.log(id);
-
-	db.student.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){
-		res.json(doc);
-	});
+	console.log(req.body.codCourse);
+	db.courseList.findAndModify({query:{_id: mongojs.ObjectId(id)},
+		update:{$set:{codCourse: req.body.codCourse, courseName: req.body.courseName, semester: req.body.semester, year: req.body.year}},
+		new: true}, function(err, doc){
+			res.json(doc);
+		});
 });
 
-app.get('/course/:id', function(req, res){
-	var id = req.params.id;
-	console.log(id);
-
-	db.course.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){
-		res.json(doc);
-	});
-});
-*/
 app.listen(port);
 console.log("Server running on port: " + port);
