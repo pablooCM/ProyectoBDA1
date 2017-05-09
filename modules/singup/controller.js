@@ -1,5 +1,10 @@
 var app = angular.module('singup', []);
-app.controller('SingupCtrl', ['$scope','$http', function($scope, $http) {
+app.controller('SingupCtrl', ['$scope','$http','$window', function($scope, $http, $window) {
+
+	$scope.goToPath = function(path) {
+		console.log("Go to Path: " + path);
+ 		$window.location.href = path;
+ 	}
 
 	var refresh = function() {
 		$http.get('/courseList').then( function(res) {
@@ -8,9 +13,10 @@ app.controller('SingupCtrl', ['$scope','$http', function($scope, $http) {
 	}
 
 	var addStudent = function() {
-		$http.post('/studentList', $scope.student).then( function(res, err2) {
-			if(!err2){
+		$http.post('/studentList', $scope.student).then( function(res, err) {
+			if(!err){
 				window.alert("Éxito en el registro del usuario");
+				$scope.gotopath("/");
 			} else {
 				window.alert("ERROR en la conexión");
 			}
@@ -18,12 +24,6 @@ app.controller('SingupCtrl', ['$scope','$http', function($scope, $http) {
 	}
 
 	refresh();
-
-	$scope.goLogin = function() {
-		$http.get('/').then( function(res) {
-			$scope.student = "";
-		});
-	}
 
 	$scope.register = function(){
 		if(	$scope.student == "" || 
