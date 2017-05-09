@@ -12,9 +12,12 @@
   <title>MEAN Stack Test</title>
 </head>
 <body>
-  <button class="btn btn-primary" ng-click="logout()">Cerrar Sesión</button>
   <div class="container" ng-controller="ManagerCtrl">
-    
+    <button class="btn btn-danger" ng-click="goToPath('/')">Cerrar Sesión</button>
+
+    <br>
+    <br>
+
     <h2>Reportes de cursos</h2>
     <td><a href="../home_manager/reports"><button class="btn btn-success">Reportes</button></a></td>
 
