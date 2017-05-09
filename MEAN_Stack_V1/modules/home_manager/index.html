@@ -1,9 +1,85 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE>
+<html ng-app="managerApp">
 <head>
-	<title>App v.2.0</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <meta charset="utf-8">
+
+  <title>MEAN Stack Test</title>
 </head>
 <body>
-	<H1>Hola Mundo</H1>
+  <button class="btn btn-primary" ng-click="logout()">Cerrar Sesión</button>
+  <div class="container" ng-controller="ManagerCtrl">
+    <h2>Gestionar cursos</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>C&oacute;digo de curso</th>
+          <th>Nombre</th>
+          <th>Semestre</th>
+          <th>Año</th>
+          <th>Opciones</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input class="form-control" ng-model="course.codCourse"></td>
+          <td><input class="form-control" ng-model="course.courseName"></td>
+          <td><input class="form-control" ng-model="course.semester"></td>
+          <td><input class="form-control" ng-model="course.year"></td>
+
+          <td><button class="btn btn-primary" ng-click="addCourse()">Agregar Curso</button></td>
+          <td><button class="btn btn-info" ng-click="updateCourse()">Actualizar</button></td>
+          <td><button class="btn btn-default" ng-click="unselect()">Limpiar</button></td>
+        </tr>
+        <tr ng-repeat ="course in courseList">
+          <td>{{course.codCourse}}</td>
+          <td>{{course.courseName}}</td>
+          <td>{{course.semester}}</td>
+          <td>{{course.year}}</td>
+
+          <td><a href="preferencias.html"><button class="btn btn-success">Preferencias</button></a></td>
+          <td><button class="btn btn-warning" ng-click="editCourse(course._id)">Modificar Curso</button></td>
+          <td><button class="btn btn-danger" ng-click="removeCourse(course._id)">Borrar Curso</button></td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Gestionar estudiantes</h2>
+
+    <table>
+      <thead>
+        <th>Nombre</th>
+        <th>Carnet</th>
+        <th>Curso</th>
+        <th>Email</th>
+        <th>Opciones</th>
+      </thead>
+
+      <tbody>
+          <tr ng-repeat ="student in studentList">
+            <td>{{student.name}}</td>
+            <td>{{student.cardNumber}}</td>
+            <td>{{student.course}}</td>
+            <td>{{student.email}}</td>
+
+            <td><a href="estudiante.html"><button class="btn btn-secondary">Ver Información</button></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"> </script>
+  <script src="controller.js"></script>
 </body>
 </html>
