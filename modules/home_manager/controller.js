@@ -1,12 +1,12 @@
 var app = angular.module('managerApp', []);
-app.controller('ManagerCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('ManagerCtrl', ['$scope', '$http','$window', function($scope, $http, $window) {
+
+  $scope.goToPath = function(path) {
+    console.log("Go to Path: " + path);
+    $window.location.href = path;
+  }
 
   var refresh = function(){
-    $http.get('/student').success(function(response){
-      $scope.studentList = response;
-      $scope.student = "";
-    });
-
     $http.get('/courseList').success(function(response){
       $scope.courseList = response;
       $scope.course = "";
