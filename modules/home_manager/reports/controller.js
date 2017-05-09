@@ -1,5 +1,10 @@
-var app = angular.module('editCourse', []);
-app.controller('editCourseCtrl', ['$scope','$http', function($scope, $http){
+var app = angular.module('reports', []);
+app.controller('ReportsCtrl', ['$scope','$http','$window', function($scope, $http, $window){
+
+	$scope.goToPath = function(path) {
+		console.log("Go to Path: " + path);
+		$window.location.href = path;
+	}
 
 	var refresh = function() { 
 		$http.get('/courseList').then(function(response, err) {
