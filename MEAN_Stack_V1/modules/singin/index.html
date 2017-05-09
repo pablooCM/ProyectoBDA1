@@ -1,5 +1,5 @@
 <!DOCTYPE>
-<html ng-app="singin">
+<html ng-app="singup">
 <head>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<form name="Container" class="container" ng-controller="SinginCtrl">
+	<form name="Container" class="container" ng-controller="SingupCtrl">
 		<h1>Registro</h1>
 
 		<table class="table">
@@ -23,41 +23,52 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>Nombre *</td>
+					<td>Nombre Completo *</td>
 					<td>
-						<input type="text" name="studentName" class="form-control" ng-model="student.name" required>
-						<span style="color:red" ng-show="Container.studentName.$dirty && Container.studentName.$invalid">
-	  						<span ng-show="Container.studentName.$error.required">Nombre de usuario requerido.</span>
-	  					</span>
+						<input type="text" name="studentName" class="form-control" ng-model="student.name">
   					</td>
 				</tr>
 				<tr>
-					<td>Carné *</td>
+					<td>Carné estudiantil *</td>
 					<td>
 						<input type="number" class="form-control" ng-model="student.cardNumber" name="studentCard" required>
-						<span style="color:red" ng-show="Container.studentCard.$dirty && Container.studentCard.$invalid">
-	  						<span ng-show="Container.studentCard.$error.required">Nombre de usuario requerido.</span>
-	  					</span>
 					</td>
 				</tr>
 				<tr>
-					<td>Email *</td>
+					<td>Correo electronico *</td>
 					<td>
 						<input type="email" class="form-control" ng-model="student.email" name="studentEmail" required>
-						<span style="color:red" ng-show="Container.studentEmail.$dirty && Container.studentEmail.$invalid">
-						<span ng-show="Container.studentEmail.$error.required">Email is required.</span>
-						<span ng-show="Container.studentEmail.$error.email">Invalid email address.</span>
-						</span>
 					</td>
 				</tr>
 				<tr>
-					<td>Celular</td>
-					<td><input type="number" class="form-control" ng-model="student.celNumber"></td>
+					<td>Contraseña de usuario *</td>
+					<td>
+						<input type="password" class="form-control" ng-model="student.pass" name="studentPass" required>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
-						<button class = "btn btn-primary" ng-click = "addStudent()" ng-disabled= "Container.studentName.$dirty && Container.studentName.$invalid || 
-						Container.studentName.$dirty && Container.studentName.$invalid || Container.studentEmail.$dirty && Container.studentEmail.$invalid">Registrarse</button>
+					<td>Número de celular</td>
+					<td>
+						<input type="number" class="form-control" ng-model="student.celNumber">
+					</td>
+				</tr>
+				<tr>
+					<td>Curso</td>
+					<td>
+						<select class="form-control" ng-model="student.course" 
+						ng-options = "course.courseName for course in courseList" ng-change= "showPreferences(course)"></select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<button class ="btn btn-danger" type="back" ng-click = "goLogin()" formnovalidate>Salir</button>
+					</td>
+					<td>
+						<button class ="btn btn-primary btn-block" type="sumit" ng-click ="addStudent()" 
+						ng-disabled="Container.studentName.$dirty && Container.studentName.$invalid || 
+						Container.studentName.$dirty && Container.studentName.$invalid || 
+						Container.studentPass.$dirty && Container.studentPass.$invalid ||
+						Container.studentEmail.$dirty && Container.studentEmail.$invalid">Registrarse</button>
 					</td>
 				</tr>
 			</tbody>
