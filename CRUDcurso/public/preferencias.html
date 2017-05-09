@@ -1,0 +1,66 @@
+  <!DOCTYPE>
+<!-- esto es para que se conecte con angular y pueda utilizar la magia de angularjs -->
+<html ng-app="myApp">
+<!-- Aquí jala los estilos e inserta bootstrap para que sea responsive y no tener que meterle mano a un CSS con los estilos hashtag la magia de bootstrap -->
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+<!-- El título que sale en la pestañita del navegador -->
+    <title>Preferencias</title>
+  </head>
+  <!-- La página básicamente -->
+  <body>
+    <!-- esto es lo que interactúa con controller.js, AppCtrl es el que establece la conexión entre ambos archivos -->
+    <div class="container" ng-controller="AppCtrl">
+      <h1>Gesti&oacute;n de Preferencias</h1>
+<!-- hace la tabla -->
+      <table class="table">
+        <!-- thead son como los nombres de las columnas pero todas juntas -->
+        <thead>
+          <!-- El nombre de cada columna de la tabla -->
+          <tr>
+
+            <th>Preferencias</th>
+
+            <th>Operación</th>
+            <!-- &nbsp; son blank spaces -->
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <!-- aquí van los inputs en los que el usuario ingresa varas para modificar el curso -->
+        <tbody>
+          <tr>
+            <!-- td son los elementos de una lista en la que va la que se mete cada elemento, al poner ng-model mete todo esto un un json que se llama curso -->
+            <td><input class="form-control" ng-model="preferencia"></td>
+
+            <!-- ng-clicc agrega una acción al botón, mientras que lo que estaá dentro  de los paréntesis es la función que llama en el controller -->
+            <td><button class="btn btn-primary" ng-click="addPrefernecia()">Agregar Preferencia</button></td>
+            <td><button class="btn btn-info" ng-click="actualizarPreferencia()">Actualizar</button></td>
+            <td><button class="btn btn-default" ng-click="desseleccionarPreferencias()">Limpiar</button></td>
+            <td><a href="index.html"><button class="btn btn-success" >Regresar</button></a><tds>
+          </tr>
+          <!-- el ng-repeat es como un while que jala todos los archivos en la bd hasta que no hayan más con esos parámetros -->
+          <tr ng-repeat ="curso in listaDeCursos">
+            <td>{{curso.preferencias}}</td>
+            <td><button class="btn btn-danger" ng-click="removePreferencia(preferencia)">Borrar Preferencia</button></td>
+            <td><button class="btn btn-warning" ng-click="modificarPreferencia(preferencia)">Modificar Preferencia</button></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+<!-- script para usar angular -->
+    <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"> </script>
+    <!-- script para inicializar el controller.js -->
+    <script src="controller.js"></script>
+
+
+
+  </body>
+</html>
